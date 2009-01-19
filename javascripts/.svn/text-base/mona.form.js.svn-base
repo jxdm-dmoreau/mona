@@ -1,0 +1,132 @@
+function displayForm()
+{
+
+    function display_tree() {
+        var jThis = $(this);
+        jThis.addClass("form_cat_selected");
+        $("#form_tree").show();
+        var jInput = $(this);
+        return false;
+    }
+
+    function add_cat() {
+        var id_cat = $("#form_nb_cat").val();
+        var div = $("<div id=\"div_cat_"+id_cat+"\">");
+        /* nom de la catégorie */
+        var input = $("<input type=\"text\" id=\"cat_name_"+id_cat+"\" name=\"cat_name_"+id_cat+"\"/>");
+        /* quand on clique sur le input, l'arbre apparait */
+        input.click(display_tree);
+        div.append(input);
+        /* id de la catégorie */
+        input = $("<input type=\"hidden\" id=\"cat_id_"+id_cat+"\" name=\"cat_id_"+id_cat+"\"/>");
+        div.append(input);
+        /* valeur associée */
+        input = $("<input type=\"text\" id=\"cat_value_"+id_cat+"\" name=\"cat_value_"+id_cat+"\"/>");
+        div.append(input);
+        var link_remove = $("<a href=\"#"+id_cat+"\">X</a>");
+        div.append(link_remove);
+        link_remove.click( function () {
+                var jThis = $(this);
+                var reg = /#(\d+)/;
+                var id = reg.exec(jThis.attr("href"));
+                $("#div_cat_"+id[1]).remove();
+                return false;
+                });
+        id_cat++;
+        $("#form_nb_cat").val(id_cat);
+        $("#list_cat").append(div);
+        return false;
+    }
+
+
+    /* aller chercher la page */
+    $("#div_form").load("form2.html", function () {
+        /* calendrier */
+        $("#form_calendar").datepicker("destroy");
+        $("#form_calendar").datepicker({dateFormat: 'yy-mm-dd'});
+        /* L'arbre des catégories */
+        buildCatTree("#form_tree");
+        /* fill the input */
+        $("#form_tree a").click(
+            function () {
+                var jInput = $(".form_cat_selected");
+                var reg = /cat_name_(\d+)/;
+                var id = reg.exec(jInput.attr("id"));
+                /* le nom */
+                jInput.val($(this).text());
+                /* l'id */
+                $("#cat_id_"+id[1]).val($(this).attr("href"));
+                /* cache l'arbre */
+                $("#form_tree").hide();
+                /* on enlève l'attribut */
+                jInput.removeClass("form_cat_selected");
+                return false;
+            }
+        );
+        $("#form_tree").hide();
+        /* remplir la liste des who */
+        monaFillWho("form_who");
+        /* transformation du formulaire en modal */
+        $("#form").modal();
+        /* ajout d'une catégorie */
+        $("#form_cat button").click(add_cat);
+
+        /* quand on valide le formulaire */
+       		$("#form").submit(function() {
+			/* send */
+			var s = $(this).serialize(); 
+			$.ajax({ 
+				type: "POST", 
+				data: s, 
+				url: $(this).attr("action"), 
+				success: function(retour){
+					$.modal.close();
+					$("#log").html(retour);
+					monaDisplayList();
+				},
+                                error: function() {
+                                    alert("error");
+                                    return false;
+                                }
+			}); 
+			/* check the form */
+                        /*
+			if ($("#form_date input").val() == "") {
+				$("#form_date span").addClass("error").text("Date invalide").show().fadeOut(3000);
+				return false;
+			}
+                        */
+                        alert("Submit");
+                        return false;
+                        /*
+			if ($("#form_value input").val() == "00.00") {
+				$("#form_value span").hide().addClass("error").text("Somme invalide").show().fadeOut(3000);
+				return false;
+			}
+                        */
+
+			/* Vérifier que la somme se retrouve dans la toutes les catégories */
+			var somme = $("#form_value input").val();
+
+			/* Somme des autres */
+			var total_to_check = 0.00;
+			$("#list_cat input:odd").each(function() {
+				var value = $(this).val();
+				/* bidouille pour ne pas confonde concatÃ©nation et addition */
+				value = value * (-1) ;
+				total_to_check = total_to_check - value;
+			});
+			if (somme != total_to_check) {
+				$("#form_value span").hide().addClass("error").text("Mauvais partage entre les catÃ©gories").show().fadeOut(3000);
+				return false;
+			}
+
+			return false; 
+			});
+
+        }
+    );
+
+
+
+}

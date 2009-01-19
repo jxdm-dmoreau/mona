@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json
+END
+JSONParseError.as
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSONParseError.as
+END
+JSONDecoder.as
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSONDecoder.as
+END
+JSONTokenizer.as
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSONTokenizer.as
+END
+JSON.as
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSON.as
+END
+JSONEncoder.as
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSONEncoder.as
+END
+JSONToken.as
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSONToken.as
+END
+JSONTokenType.as
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/com/adobe/serialization/json/JSONTokenType.as
+END

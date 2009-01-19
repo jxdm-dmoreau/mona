@@ -1,0 +1,53 @@
+<h2>Carégories</h2>
+
+
+
+
+<div id="selector">
+    <ul id="david_tree"></ul>
+    <button id="add_cat">Ajouter</button>
+    <button id="modif_cat">Modifier</button>
+    <button id="del_cat">Supprimer</button>
+</div>
+
+
+<form method="get" action="scripts/add_category.php" id="form_add_cat">
+    <fieldset>
+        <p>Ajouter une nouvelle catégorie dans <b></b>:</p>
+        <input type="hidden" name="father_id" />
+        <input type="text" name="name" />
+        <input type="text" name="color" value="#203020"/>
+        <input type="submit" id="add_cat" value="Nouveau" />
+        <input type="submit" id="cancel" value="Annuler" />
+    </fieldset>
+</form>
+
+
+<!--
+        <div id="div_modif">
+            <input type="text" name="modif_name" value="" />
+            <input type="submit" id="submit_modif" value="Modifier" />
+            <input type="submit" id="cancel" value="Annuler" />
+        </div>
+
+        -->
+
+
+<h2>A qui on donne de l'argent</h2>
+
+<div id="who">
+<form method="get" action="scripts/" id="form_who">
+    <legend>Who</legend>
+    <fieldset>
+        <select></select>
+        <input type="submit" value="Modifier" />
+        <input type="submit" value="Supprimer" />
+    </fieldset>
+</form>
+
+
+
+</div>
+
+
+<div id="admin_log"></div>

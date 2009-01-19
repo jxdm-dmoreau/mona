@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar
+END
+OFC_Charts_Bar_Value.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_Value.php
+END
+OFC_Charts_Bar_Filled.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_Filled.php
+END
+OFC_Charts_Bar_Sketch.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_Sketch.php
+END
+OFC_Charts_Bar_Stack.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_Stack.php
+END
+OFC_Charts_Bar_3d.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_3d.php
+END
+OFC_Charts_Bar_Horizontal.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_Horizontal.php
+END
+OFC_Charts_Bar_Glass.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Charts/Bar/OFC_Charts_Bar_Glass.php
+END

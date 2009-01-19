@@ -1,0 +1,82 @@
+8
+
+dir
+6
+https://mona33.googlecode.com/svn/trunk/OFC/php5-ofc-library
+https://mona33.googlecode.com/svn
+
+
+
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+9c0904e2-a84b-11dd-81d7-27b247425303
+
+build_package.php
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+fd2da323fc277ecea54c8d57656c21ed
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+open-flash-chart-object.php
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+5bfba251ebd22777904c7454575fb7fc
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+lib
+dir
+
+package.xml
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+5ade59bca818bff10b73798a87422e8f
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+README.txt
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+a7f9df7d2463a7be67021e62d21db540
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+examples
+dir
+

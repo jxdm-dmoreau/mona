@@ -1,0 +1,70 @@
+8
+
+dir
+6
+https://mona33.googlecode.com/svn/trunk/OFC/php5-ofc-library/lib/OFC/Elements
+https://mona33.googlecode.com/svn
+
+
+
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+9c0904e2-a84b-11dd-81d7-27b247425303
+
+OFC_Elements_Base.php
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+7cfa2321aaa6fcaf8456efc4dc3129e6
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+Axis
+dir
+
+OFC_Elements_Title.php
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+2ad077ad65e892690039e7c53ecf410d
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+OFC_Elements_Axis.php
+file
+
+
+
+
+2008-12-20T16:02:16.000000Z
+41be4fb6f61fa7165f2060d7f5da4955
+2008-11-01T20:34:55.438513Z
+2
+cmoidavid
+
+Legend
+dir
+

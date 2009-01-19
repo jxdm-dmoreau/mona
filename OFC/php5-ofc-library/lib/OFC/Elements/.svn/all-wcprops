@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements
+END
+OFC_Elements_Base.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/OFC_Elements_Base.php
+END
+OFC_Elements_Title.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/OFC_Elements_Title.php
+END
+OFC_Elements_Axis.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/OFC_Elements_Axis.php
+END

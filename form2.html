@@ -1,0 +1,40 @@
+<form id="form" name="form" action="scripts/add_operation.php" method="post" >
+
+    <div id="form_date">
+    Date :
+        <input  type="text" size="10" value="" id="form_calendar" name="date"/>
+	<span></span>
+    </div>
+
+    <div id="form_type">
+        Type :
+        <input type="radio" name="type" value="debit" checked />Débit
+        <input type="radio" name="type" value="credit" />Crédit
+        <br />
+    </div>
+
+
+    <table id="table_cat">
+    <thead>
+    <tr><th>Catégories</th><th class="somme">Somme</th></tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+    <tr><td>Total :</td><td><input type="input" id="input_total" value="0.00"/>€</td></tr>
+    </tfoot>
+    </table>
+    <button id="button_add_cat">Ajouter une catégorie</button>
+
+    <div id="form_tag">
+        Tags : <input type="test" id="input_tags" value="" autocomplete="off"/>
+        <div id="tags_suggestions"></div>
+    </div>
+<!--
+    <div id="form_confirm">
+        Pointage :
+        <input type="checkbox" name="pointage" size="30" value="" />
+        <br />
+    </div>
+-->
+</form>

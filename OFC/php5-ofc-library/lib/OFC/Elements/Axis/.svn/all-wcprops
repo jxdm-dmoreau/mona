@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/Axis
+END
+OFC_Elements_Axis_Y_Right.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/Axis/OFC_Elements_Axis_Y_Right.php
+END
+OFC_Elements_Axis_X_Label.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/Axis/OFC_Elements_Axis_X_Label.php
+END
+OFC_Elements_Axis_X.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/Axis/OFC_Elements_Axis_X.php
+END
+OFC_Elements_Axis_Y.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/Axis/OFC_Elements_Axis_Y.php
+END
+OFC_Elements_Axis_X_Label_Set.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/2/trunk/OFC/php5-ofc-library/lib/OFC/Elements/Axis/OFC_Elements_Axis_X_Label_Set.php
+END

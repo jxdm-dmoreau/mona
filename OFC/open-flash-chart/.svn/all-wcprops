@@ -1,0 +1,239 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart
+END
+Loading.as
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/Loading.as
+END
+YAxisLabelsRight.as
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YAxisLabelsRight.as
+END
+RadarAxis.as
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/RadarAxis.as
+END
+Background.as
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/Background.as
+END
+PointHLC.as
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/PointHLC.as
+END
+tr.as
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/tr.as
+END
+XLabelStyle.as
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/XLabelStyle.as
+END
+YAxisBase.as
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YAxisBase.as
+END
+Point.as
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/Point.as
+END
+Parser.as
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/Parser.as
+END
+PointCandle.as
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/PointCandle.as
+END
+NumberFormat.as
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/NumberFormat.as
+END
+ScreenCoordsRadar.as
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/ScreenCoordsRadar.as
+END
+InnerBackground.as
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/InnerBackground.as
+END
+RadarSpokeLabels.as
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/RadarSpokeLabels.as
+END
+XAxisLabels.as
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/XAxisLabels.as
+END
+.FlashDevelop_AS3_cache
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/.FlashDevelop_AS3_cache
+END
+TextFieldY.as
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/TextFieldY.as
+END
+main.as
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/main.as
+END
+ScreenCoordsBase.as
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/ScreenCoordsBase.as
+END
+ScreenCoords.as
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/ScreenCoords.as
+END
+YLabelStyle.as
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YLabelStyle.as
+END
+JsonErrorMsg.as
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/JsonErrorMsg.as
+END
+Tooltip.as
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/Tooltip.as
+END
+YAxisLabelsLeft.as
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YAxisLabelsLeft.as
+END
+YAxisRight.as
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YAxisRight.as
+END
+XAxis.as
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/XAxis.as
+END
+Range.as
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/Range.as
+END
+ShowTipEvent.as
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/ShowTipEvent.as
+END
+ErrorMsg.as
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/ErrorMsg.as
+END
+JsonInspector.as
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/JsonInspector.as
+END
+RadarAxisLabels.as
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/RadarAxisLabels.as
+END
+object_helper.as
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/object_helper.as
+END
+YAxisLeft.as
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YAxisLeft.as
+END
+NumberUtils.as
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/NumberUtils.as
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/README.txt
+END
+open-flash-chart.as3proj
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/open-flash-chart.as3proj
+END
+YAxisLabelsBase.as
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/YAxisLabelsBase.as
+END
+json.help.txt
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2/trunk/OFC/open-flash-chart/json.help.txt
+END

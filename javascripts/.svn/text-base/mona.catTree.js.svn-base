@@ -1,0 +1,129 @@
+
+var ulId = "";
+
+
+function onSelect() {
+    $(".selected").removeClass("selected");
+    $(this).addClass("selected");
+    $("#form_add_cat input:first").val($(".selected").attr("href"));
+    $("#form_add_cat p b").text($(".selected").text());
+    return false;
+}
+
+function buildCatTree(name)
+{
+
+    ulId = name;
+    var script = "scripts/liste.php?table=categories";
+    var catArray = new Array();
+
+
+    function storeCatInArray(xmlDoc)
+    {
+        var jxml = $(xmlDoc);
+        var jCategories = jxml.find("categories");
+	var jRow = jCategories.children();
+	jRow.each(function() {
+		var jThis = $(this);
+		var jFatherId = jThis.find("father_id");
+		var jId = jThis.find("id");
+		var jName = jThis.find("name");
+                log.debug(jName.text());
+                if (catArray[jFatherId.text()] == undefined) {
+                    catArray[jFatherId.text()] = new Array();
+                }
+                catArray[jFatherId.text()].push(new Array(jId.text(), jName.text()));
+	});
+        return true;
+    }
+
+    function displayCatArray()
+    {
+        $(catArray).each(function(index, value) {
+                if (value != undefined) {
+                    $("#admin_log").append("Index="+ index + "value="+value+"<br>");
+                }
+                });
+    }
+
+    function insertTree()
+    {
+        insertTree_r(0, "Catégories", $(name));
+
+    }
+    function insertTree_r(ancestorId, ancestorName, jContent)
+    {
+        var jLi = $("<li>").append("<a href=\""+ancestorId+"\">"+ancestorName+"</a>");
+        if (catArray[ancestorId] == undefined) {
+            /* pas d'enfants */
+            jContent.append(jLi);
+            return true;
+        } else {
+            var jUl = $("<ul>");
+            $(catArray[ancestorId]).each(function() {
+                    insertTree_r(this[0], this[1], jUl);
+            });
+            jLi.append(jUl);
+            jContent.append(jLi);
+            return true;
+        }
+    }
+
+    /* aller chercher la liste des catégories */
+    $.ajax({
+        type: "GET",
+        url: script,
+        async: false,
+        success: function(xmlDoc) {
+            storeCatInArray(xmlDoc);
+            //displayCatArray();
+            insertTree();
+            $(ulId).treeview({
+			persist: "location",
+			collapsed: true,
+			unique: true,
+            });
+            $(ulId +" a").click(onSelect);
+        }
+    });
+}
+
+
+function addCat(newName, newId)
+{
+    var link = "<li><a href=\""+newId+"\">"+newName+"</a></li>";
+    if ($(".selected:parent + ul").length == 0) {
+            $(".selected").parent().append("<ul>"+link+"</ul>");
+    } else {
+            $(".selected + ul").prepend(link);
+    }
+                $(".collapsable").removeClass("collapsable");
+                $(".lastCollapsable").removeClass("lastCollapsable");
+                $(".expandable").removeClass("expandable");
+                $(".hitarea").removeClass("hitarea");
+                $(".collapsable-hitarea").removeClass("collapsable-hitarea");
+                $(ulId+" div").remove();
+                $(ulId).treeview();
+                $(ulId+" a").unbind('click');
+                $(ulId+" a").click(onSelect);
+}
+
+function delCat()
+{
+    var ul = $(".selected").parent().parent();
+    $(".selected").parent().remove();
+    if (ul.text() == "") {
+        ul.remove();
+    }
+    /* clean tree */
+    $(".collapsable").removeClass("collapsable");
+    $(".lastCollapsable").removeClass("lastCollapsable");
+    $(".expandable").removeClass("expandable");
+    $(".last").removeClass("last");
+    $(".hitarea").removeClass("hitarea");
+    $(".collapsable-hitarea").removeClass("collapsable-hitarea");
+    $(ulId+" div").remove();
+    $(ulId).treeview();
+
+
+}
