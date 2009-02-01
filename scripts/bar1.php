@@ -11,7 +11,7 @@ $mysql = new MySQL($mysql_server, $mysql_login, $mysql_pwd, $mysql_db);
 /* il faut chercher tout les fils de la catégorie id ... */
 $query = "
     SELECT *
-    FROM categories";
+    FROM cat";
 $result = $mysql->query($query);
 $categories = array();
 while ($line = mysql_fetch_assoc($result)) {
@@ -47,17 +47,17 @@ foreach ($tab as $value) {
         $where .= " OR ";
     }
     extract($value);
-    $where .= "categories.id = $id";
+    $where .= "cat.id = $id";
     $i++;
 }
 
 
 
 /* envoie des 12 requetes vers le serveur MySQL */
-for($i = 1; $i < 13; $i++ ) {
+for($i = 1; $i < 12; $i++ ) {
     $current_month = $i;
-    $next_year = 2008;
-    $current_year = 2008;
+    $next_year = 2009;
+    $current_year = 2009;
     $next_month = $current_month + 1;
     if ($next_month == 13) {
         $next_month = 1;
@@ -65,13 +65,13 @@ for($i = 1; $i < 13; $i++ ) {
     }
     $query = "
         SELECT SUM(op_cat.value)
-        FROM op_cat, categories, operations
+        FROM op_cat, cat, operations
         WHERE ($where)
-        AND op_cat.cat_id = categories.id
+        AND op_cat.cat_id = cat.id
         AND op_cat.op_id = operations.id
         AND operations.date >= '$current_year-$current_month-01'
         AND operations.date < '$next_year-$next_month-01'
-        GROUP BY categories.id";
+        GROUP BY cat.id";
     $result = $mysql->query($query);
     $sous_total = 0;
     while($line = mysql_fetch_assoc($result)) {

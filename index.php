@@ -9,8 +9,7 @@
 
 
 
-<link rel="stylesheet" media="screen" type="text/css" title="Style" href="./styles/main.css" />
-        <link rel="stylesheet" media="screen" type="text/css" title="Style" href="./styles/ui.datepicker.css" />
+        <link rel="stylesheet" media="screen" type="text/css" title="Style" href="./styles/main.css" />
         <script type="text/javascript" src="javascripts/jquery-1.3.min.js"></script>
         <script type="text/javascript" src="javascripts/mona.js"></script>
         <script type="text/javascript" src="javascripts/jquery.tablesorter.min.js"></script>
@@ -18,17 +17,19 @@
         <script type="text/javascript" src="javascripts/mona.liste.js"></script>
         <script type="text/javascript" src="javascripts/mona.form.js"></script>
         <script type="text/javascript" src="javascripts/jquery.dtree.js"></script>
-        <script type="text/javascript" src="javascripts/jquery.ui.all.js"></script>
 	<script type="text/javascript" src="javascripts/swfobject.js"></script>
 	<script type="text/javascript" src="javascripts/jquery.sprintf.js"></script>
 	<link rel="StyleSheet" href="./styles/dtree.css" type="text/css" />
-	<link rel="StyleSheet" href="./styles/ui.all.css" type="text/css" />
 	<script type="text/javascript" src="javascripts/dtree.js"></script>
 	<script src="javascripts/jquery.cookie.js" type="text/javascript"></script>
 	<script src="javascripts/jquery.treeview.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="./styles/jquery.treeview.css" />
         <script type="text/javascript" src="blackbird/blackbird.js"></script>
         <link type="text/css" rel="Stylesheet" href="blackbird/blackbird.css" />
+        <!-- jquery ui -->
+	<script type="text/javascript" src="javascripts/jquery.ui.all.js"></script>
+	<link rel="StyleSheet" href="./styles/ui.all.css" type="text/css" />
+	<link rel="StyleSheet" href="./styles/ui.datepicker.css" type="text/css" />
 
 
 
@@ -37,7 +38,7 @@
 
             function register() {
                 /* chargement */
-               initWho(); 
+               initLabels(); 
 
                 $("#liste").click(monaDisplayList);
                 $("#params").click(monaDisplayParams);
@@ -108,14 +109,11 @@
 
     <body>
         <div id="log"></div>
-        <div id="out">
-            <div id="in"></div>
-        </div>
 
         <div id="menu">
         <ul>
         <li><a id="liste" href="#">Liste des Opérations</a></li>
-        <li><a id="params" href="#">Paramètres</a></li>
+        <li><!--<a id="params" href="#">-->Paramètres<!--</a>--></li>
         <li><a id="modal" href="#">Ajout d'une opération</a></li>
         <li><a  id="stats" href="#stats">Statistiques</a></li>
         <li> << Retour</li>
@@ -127,8 +125,13 @@ jie est vraiment très gentille et jolie<br />
         </div>
 
 
-<div id="div_form"></div>
 
+
+
+
+
+<div id="div_form">
+</div>
     </body>
 
 </html>

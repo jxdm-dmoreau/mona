@@ -81,11 +81,12 @@ tr:hover {
 th {
 	background-color: #e5e5e5;
 }
+/*
 td {
 padding-left: 5px;
 padding-right: 5px;
 }
-
+*/
 
 
 
@@ -190,17 +191,9 @@ div#in {
 
 /* tree */
 ul#form_tree {
-display: none;
+    display: none;
     font-size: 11px;
-	 font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	 position: fixed;
-	 top: 100px;
-	 left: 100px;
-	 background-color: white;
-	 width: 200px;
-	-moz-border-radius: 10px 10px 10px 10px;
-	    border:2px solid #ccc;
-/*	opacity: 0.9;*/
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
 input.input_cat_selected {
@@ -222,4 +215,8 @@ ul#suggestions {
 
 li.tagsselected {
 	background-color: #e5e5e5;
+}
+
+.mona-icon:hover {
+    cursor: pointer;
 }

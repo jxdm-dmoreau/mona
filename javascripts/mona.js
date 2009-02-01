@@ -2,56 +2,42 @@
 // who
 // clé: index
 // valeur : nom
-var monaTabWho = new Array();
+var monaTabLabels = new Array();
 
 /* categories */
 var monaTabCategoriesId = new Array();
 var monaTabCategoriesFather = new Array();
 
 
-var nbInit = 0;
-var totalNbInit = 2;
 
-
-function progress_bar()
-{
-    var max_length = 298;
-    var length = max_length * nbInit / totalNbInit;
-    length = Math.round(length);
-    $("div#in").css("width", length+"px");
-
-}
-
-function initWho()
+function initLabels()
 {
     /* who */
     $.ajax({
         type: "GET",
-        url: "scripts/liste.php?table=who",
+        url: "scripts/liste.php?table=labels",
         success: function(xml) {
             var jXml = $(xml);
-            var jWho = jXml.find("who");
+            var jWho = jXml.find("labels");
             var jRow = jWho.children();
             jRow.each(function() {
                 var jThis = $(this);
                 var jName = jThis.find("name");
                 var jId = jThis.find("id");
-                log.debug("who: " + jId.text() + " - " + jName.text());
-                monaTabWho[jId.text()] = jName.text();
+                log.debug("label: " + jId.text() + " - " + jName.text());
+                monaTabLabels[jId.text()] = jName.text();
             });
-            nbInit++;
-            progress_bar();
         }
     });
 
     /* categories */
     $.ajax({
         type: "GET",
-        url: "scripts/liste.php?table=categories",
+        url: "scripts/liste.php?table=cat",
         async: false,
         success: function(xml) {
             var jXml = $(xml);
-            var jWho = jXml.find("categories");
+            var jWho = jXml.find("cat");
             var jRow = jWho.children();
             jRow.each(function() {
                 var jThis = $(this);
@@ -65,8 +51,6 @@ function initWho()
                 }
                 monaTabCategoriesFather[jFather.text()].push(jId.text());
             });
-            nbInit++;
-            progress_bar();
         }
     });
 }

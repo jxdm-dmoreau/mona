@@ -17,7 +17,9 @@ $mysql = new MySQL($mysql_server, $mysql_login, $mysql_pwd, $mysql_db);
 
 
 
-$query = "SELECT operations.id, operations.date, operations.value, who.name FROM operations, who where operations.who_id = who.id ";
+$query = "
+SELECT operations.id, operations.date, operations.value
+FROM operations"; 
 $result = $mysql->query($query);
 print "<liste>\n";
 while ($line = mysql_fetch_assoc($result)) {
@@ -25,6 +27,16 @@ while ($line = mysql_fetch_assoc($result)) {
     print "\t<row>\n";
     foreach($line as $key => $value) {
 	    print("\t\t<$key>$value</$key>");
+    }
+    $query="SELECT labels.name
+        FROM labels, `op-labels`
+        WHERE `op-labels`.`op-id` = $id
+        AND labels.id = `op-labels`.`label-id`
+        ";
+    $result2 = $mysql->query($query);
+    while ($line2 = mysql_fetch_assoc($result2)) {
+        $name = $line2['name'];
+        print("\t\t<label>$name</label>");
     }
     print "\t</row>\n";
 }

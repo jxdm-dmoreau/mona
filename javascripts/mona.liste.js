@@ -3,7 +3,7 @@ function monaDisplayList() {
     // aller chercher le fichier XML
     $.ajax({
         type: "GET",
-        //url: "scripts/liste.php?table=operations",
+        //url: "scripts/liste.php?table=op",
         url: "scripts/liste2.php",
         success: displayList
     });
@@ -83,7 +83,7 @@ function displayList(xml) {
     tr.append("<th id=\"th_date\">Date</th>");
     tr.append("<th id=\"th_credit\">Crédit</th>");
     tr.append("<th id=\"th_debit\">Débit</th>");
-    tr.append("<th id=\"th_who\">Pour/De qui?</th>");
+    tr.append("<th id=\"th_labels\">Labels</th>");
     tr.append("<th id=\"\"></th>");
     tr.append("<th id=\"\"></th>");
     var thead = $("<thead></thead>");
@@ -94,13 +94,18 @@ function displayList(xml) {
 	    tr.append("<td>" + tab[i]['id'] + "</td>");
 	    tr.append("<td>" + tab[i]['date'] + "</td>");
             if (tab[i]['value'] > 0) {
-                tr.append("<td>" + sprintf("%.2f€", tab[i]['value']) + "</td>");
-                tr.append("<td>" + sprintf("%.2f€", 0) + "</td>");
+                tr.append("<td>" + $.sprintf("%.2f€", tab[i]['value']) + "</td>");
+                tr.append("<td>" + $.sprintf("%.2f€", 0) + "</td>");
             } else {
-                tr.append("<td>" + sprintf("%.2f€", 0) + "</td>");
-                tr.append("<td>" + sprintf("%.2f€", tab[i]['value']*(-1)) + "</td>");
+                tr.append("<td>" + $.sprintf("%.2f€", 0) + "</td>");
+                tr.append("<td>" + $.sprintf("%.2f€", tab[i]['value']*(-1)) + "</td>");
             }
-	    tr.append("<td>" + tab[i]['name'] + "</td>");
+            var tmp = "<td>";
+            for(var j = 0; j < tab[i]['labels'].length; j++) {
+                tmp += tab[i]['labels'][j].textContent + " ";
+            }
+            tmp += "</td>";
+            tr.append(tmp);
 	    tr.append("<td><button id=\"del_"+tab[i]['id']+"\">Supprimer</button></td>");
 	    tr.append("<td><a href=\""+tab[i]['id']+"\" class=\"details\">+</a></td>");
 	    $("#tab_liste").append(tr);
@@ -146,7 +151,7 @@ function traiteXmlList(xmlDoc) {
     for (var i=0; i < operations.length; ++i) {
         bigTab[i]= new Array();
         bigTab[i]['id'] = operations[i].getElementsByTagName("id")[0].firstChild.data;
-        bigTab[i]['name'] = operations[i].getElementsByTagName("name")[0].firstChild.data;
+        bigTab[i]['labels'] = operations[i].getElementsByTagName("label");
         bigTab[i]['value'] = operations[i].getElementsByTagName("value")[0].firstChild.data;
         bigTab[i]['date'] = operations[i].getElementsByTagName("date")[0].firstChild.data;
     }

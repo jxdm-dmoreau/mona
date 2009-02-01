@@ -3,7 +3,6 @@
     <div id="form_date">
     Date :
         <input  type="text" size="10" value="" id="form_calendar" name="date"/>
-	<span></span>
     </div>
 
     <div id="form_type">
@@ -12,6 +11,7 @@
         <input type="radio" name="type" value="credit" />Crédit
         <br />
     </div>
+    <input id="jie" type="text" />
 
 
     <table id="table_cat">
@@ -21,13 +21,21 @@
     <tbody>
     </tbody>
     <tfoot>
-    <tr><td>Total :</td><td><input type="input" id="input_total" value="0.00"/>€</td></tr>
+    <tr
+        ><td>Total :</td><td><input type="input" name="input_total" id="input_total" value="0.00"/>€</td>
+        <td>
+            <div class="ui-widget ui-state-default ui-corner-all mona-icon">
+                <span class="ui-icon ui-icon-plusthick"></span>
+            </div>
+        </td>
+    </tr>
     </tfoot>
     </table>
-    <button id="button_add_cat">Ajouter une catégorie</button>
+<!--    <button id="button_add_cat">Ajouter une catégorie</button>-->
+    <ul id="form_tree"></ul>
 
     <div id="form_tag">
-        Tags : <input type="test" id="input_tags" value="" autocomplete="off"/>
+        Tags : <input type="test" name="input_labels" id="input_labels" value="" autocomplete="off"/>
         <div id="tags_suggestions"></div>
     </div>
 <!--

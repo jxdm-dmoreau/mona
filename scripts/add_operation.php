@@ -14,41 +14,42 @@ print_r($_POST);
 /* 
  * valeurs attendues :
  * date : date de l'opération
- * somme : somme taotale
- * type : débit ou crédit
- * qui : pour qui est / d'où vient  l'argent
- * cat_nb : nombre max de catégories
- * cat_name_x : nom de la catégorie x
- * cat_id_x : identifiant de la catégorie x
- * cat_value_x : valeur associé à la catégorie x
- * pointage : si l'opération est pointée ou non
+ * input_total : somme totale
+ * form_type : débit ou crédit
+ * input_cat_name_x : nom de la catégorie 
+ * input_cat_id_x :  id de la catégorie
+ * input_somme_x :  somme de la catégorie
+ * input_labels :  liste des tags de cette opétation
  */       
 
-$date = $_POST['date'];
-$somme = $_POST['somme'];
-$type = $_POST['type'];
-if ($type == "debit") {
-    $somme = $somme * (-1);
+
+
+extract($_POST);
+
+/* parametres globaux */
+if ($form_type == "debit") {
+    $input_total = $input_total * (-1);
 }
-$who = $_POST['who'];
-$cat_nb = $_POST['nb_cat'];
-$cat_tab;
+
+/* paramètres par catégories */
+$max_cat_nb = 20;
 $nb = 0;
-for ($i=0; $i < $cat_nb; $i++) {
-    $tmp = $_POST["cat_id_$i"];
-    $cat_tab[$nb]['id'] = $tmp;
-    $tmp = $_POST["cat_value_$i"];
-    $cat_tab[$nb]['value'] = $tmp;
-    $tmp = $_POST["cat_name_$i"];
-    $cat_tab[$nb]['name'] = $tmp;
-    $nb++;
+for($i=0; $i < $max_cat_nb; $i++) {
+    if (isset($_POST["input_cat_id_$i"])) {
+        $cat_tab[$nb]['id'] = $_POST["input_cat_id_$i"];
+        $cat_tab[$nb]['somme'] = $_POST["input_somme_$i"];
+        //$cat_tab[$nb]['name'] = $_POST["input_cat_name_$i"];
+        $nb++;
+    }
 }
-print('<br>');
+
+
+print('<br><br><br>');
 print_r($cat_tab);
 
 
 
-$query = "INSERT INTO operations VALUES ('', '$date', '$somme', '', '', '', '', '$who')";
+$query = "INSERT INTO operations VALUES ('', '$date', '$input_total', '', '', '', '')";
 print("<p>$query</p>");
 $result = $mysql->query($query);
 
@@ -66,11 +67,42 @@ foreach($cat_tab as $key => $tab) {
         $query .= ', ';
     }
     $cat_id =$tab['id'];
-    $value = $tab['value'];
+    $value = $tab['somme'];
     $query .= "('', '$op_id', '$cat_id', '$value')";
 }
 $query .= ';';
 $result = $mysql->query($query);
+
+
+/*****************************************************************************/
+/*                           labels                                          */
+/*****************************************************************************/
+$ret = split(", ", $input_labels);
+$nb_labels = count($ret);
+for($i=0; $i<$nb_labels; $i++) {
+    /* creer les tags qui n'existent pas */
+    $query = "SELECT id FROM labels WHERE name='$ret[$i]'";
+    $result = $mysql->query($query);
+    $line = mysql_fetch_assoc($result);
+    if (isset($line['id'])) {
+        // le label existe
+        $label_id = $line['id'];
+    } else {
+        // le label n'existe pas
+        // on l'ajoute
+        $query = "INSERT INTO labels VALUES ('', '$ret[$i]')";
+        $result = $mysql->query($query);
+        // on récupère l'id
+        $query = "SELECT id FROM labels WHERE name='$ret[$i]'";
+        $result = $mysql->query($query);
+        $line = mysql_fetch_assoc($result);
+        $label_id = $line['id'];
+    }
+    /* on a l'id correspondant au tag, on peut ajouter la relatetion 
+       operation-tag */
+    $query = "INSERT INTO `op-labels` VALUES ('', '$op_id', '$label_id')";
+    $result = $mysql->query($query);
+}
 exit(0);
 
 
@@ -78,16 +110,5 @@ exit(0);
 
 
 
-/* TODO si plusieurs valeurs, faire une boucle */
 
-foreach($_POST as $key => $value) {
-	if(ereg("cat_([0-9]+)", $key,  $regs )) {
-		$query = "INSERT INTO `operation-category` VALUES ('$id','$regs[1]', '$value')";
-		print("<p>$query</p>");
-		$result = $mysql->query($query);
-		print("<p><b>$result</b></p>");
-	}
-}
-
-print("</results>\n");
 

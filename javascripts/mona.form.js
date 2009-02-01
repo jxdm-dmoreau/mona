@@ -3,6 +3,20 @@ function displayForm()
 
     var nb_row = 0; // compteur pour les différentes lignes du tableau
 
+    function choisir_categorie()
+    {
+        /* TODO Vérifier que l'utilisateur a chosit une catégorie */
+        log.info("choisir_categorie()");
+
+
+        /* on deselectionne le input */
+        var jInput = $(".input_cat_selected");
+        jInput.removeClass("input_cat_selected");
+        /* on ferme la fenêtre*/
+        $(this).dialog("close");
+        return false;
+    }
+
     /* affiche l'arbre des catégories */
     function afficher_arbre()
     {
@@ -10,14 +24,8 @@ function displayForm()
         var jThis = $(this);
         /* on applique une class au input pour pouvoir l'indentifier */
         jThis.addClass("input_cat_selected");
-        var pos = jThis.findPos();
         var jTree = $("#form_tree");
-        var posX = pos.x;
-        var posY = pos.y + 30;
-        log.debug("x="+posX+" y="+posY);
-        jTree.css("left", posX);
-        jTree.css("top", posY);
-        jTree.fadeIn("fast");
+        jTree.dialog("open");
     }
 
     function update_total()
@@ -51,12 +59,38 @@ function displayForm()
     function ajouter_ligne_tableau()
     {
         log.info("ajouter_ligne_tableau()");
-        var jInputHidden = $("<input type=\"hidden\" id=\"input_cat_id_"+nb_row+"\">");
-        var jInputCatName = $("<input id=\"input_cat_name_"+nb_row+"\" class=\"input_cat\" type=\"text\">");
-        var jInputSomme = $("<input id=\"input_somme_"+nb_row+"\" class=\"somme\" type=\"text\" value=\"0.00\">");
+
+        var jInputHidden = $("<input />");
+       jInputHidden.attr("type", "hidden");
+       jInputHidden.attr("id", "input_cat_id_"+nb_row);
+       jInputHidden.attr("name", "input_cat_id_"+nb_row);
+
+        var jInputCatName = $("<input />");
+        jInputCatName.attr("type", "text");
+        jInputCatName.attr("id", "input_cat_name_"+nb_row);
+        jInputCatName.attr("name", "input_cat_name_"+nb_row);
+        jInputCatName.attr("autocomplete", "off");
+        jInputCatName.addClass("input_cat");
+
+        var jInputSomme = $("<input />");
+        jInputSomme.attr("type", "text");
+        jInputSomme.attr("id", "input_somme_"+nb_row);
+        jInputSomme.attr("name", "input_somme_"+nb_row);
+        jInputSomme.addClass("somme");
+        jInputSomme.val("0.00");
+
         var jTr = $("<tr></tr>");
+        jTr.attr("id", "row-"+nb_row); // pour pouvoir supprimer la ligne correspondante
         var jTd = $("<td></td>");
         var jTd2 = $("<td></td>");
+        var jTd3 = $("<td></td>");
+        var jDiv = $("<div></div>");
+        jDiv.addClass("ui-widget").addClass("ui-corner-all").addClass("ui-state-default").addClass("mona-icon");;
+        var jDiv2 = $("<div></div>");
+        jDiv2.addClass("ui-icon").addClass("ui-icon-closethick").attr("nb", nb_row);
+        jDiv.append(jDiv2);
+        jTd3.append(jDiv);
+
 
         jInputSomme.change(formate_somme);
         jInputSomme.change(update_total); // le live ne gere pas encore l'event onChange
@@ -67,8 +101,25 @@ function displayForm()
         jTd2.append("€");
         jTr.append(jTd);
         jTr.append(jTd2);
+        jTr.append(jTd3);
         $("#table_cat tbody").append(jTr);
         nb_row++;
+
+        /* overwrite hover event for icons */
+        $(".mona-icon").hover(
+                 function() { $(this).addClass('ui-state-hover'); }, 
+                 function() { $(this).removeClass('ui-state-hover'); }
+                );
+
+        return false;
+    }
+
+    function enlever_ligne()
+    {
+        log.info("enlever_ligne()");
+        var nb = $(this).attr("nb");
+        $("#row-"+nb).remove();
+
         return false;
     }
 
@@ -83,9 +134,9 @@ function displayForm()
         /* l'id */
         $("#input_cat_id_"+id[1]).val($(this).attr("href"));
         /* cache l'arbre */
-        $("#form_tree").hide();
+        //$("#form_tree").hide();
         /* on enlève l'attribut */
-        jInput.removeClass("input_cat_selected");
+        //jInput.removeClass("input_cat_selected");
         return false;
     }
 
@@ -95,38 +146,39 @@ function displayForm()
 
     function extract_tags_from_input()
     {
-        var $input = $("#input_tags").val();
-        var reg = new RegExp(".+, ", "i");
-        var res = reg.exec($input);
-        if (res != null) {
-            log.debug("res="+res.length);
-        }
+        var $input = $("#input_labels").val();
+        var last = "";
+        var reg=/, /;
+        var res = $input.split(reg);
+        return res[res.length-1];
     }
 
     function auto_completion()
     {
         log.info("auto_completion");
-        _currentInputFieldValue = $("#input_tags").val();
-        log.debug("current: "+_currentInputFieldValue);
-        extract_tags_from_input();
+        _currentInputFieldValue = extract_tags_from_input();
+        log.debug("current: " + _currentInputFieldValue);
         if (_oldInputFieldValue != _currentInputFieldValue){
+            $("#tags_suggestions").hide();
             $("#tags_suggestions").empty();
             if (_currentInputFieldValue != "") {
-                var pos = $("#input_tags").findPos();
+                var pos = $("#input_labels").findPos();
                 var posX = pos.x;
                 var posY = pos.y + 25;
                 var jUl = $("<ul id=\"suggestions\"></ul>");
                 jUl.css("left", posX+"px");
                 jUl.css("top", posY+"px");
                 var reg = new RegExp(_currentInputFieldValue, "i");
-                for(var cle in monaTabWho) {
-                    var val = monaTabWho[cle];
-                    if (reg.exec(val) != null) {
+                for(var cle in monaTabLabels) {
+                    var val = monaTabLabels[cle];
+                    if (res = reg.exec(val) != null) {
+                        log.debug("dd--> "+res[0]);
                         val = val.replace(reg, "<b>"+_currentInputFieldValue+"</b>");
                         jUl.append($("<li>"+val+"</li>"));
                     }
                 }
                 $("#tags_suggestions").append(jUl);
+                $("#tags_suggestions").show();
                 _oldInputFieldValue = _currentInputFieldValue;
             }
         }
@@ -158,10 +210,20 @@ function displayForm()
 
     function select_current()
     {
+        log.debug("select_current()");
         /* fill input */
-        $("#input_tags").val($("li.tagsselected").text()+", ");
+        var $input = $("#input_labels");
+        var val = $input.val();
+        var $auto_completion = $("li.tagsselected").text();
+        var new_value = "";
+        var reg=/, /;
+        var res = val.split(reg);
+        for (var i = 0; i < res.length-1; i++) {
+            new_value += res[i] + ", ";
+        }
+        $input.val(new_value + $auto_completion + ", ");
         /* erase autocomplete */
-        $("ul#suggestions").empty();
+        $("ul#suggestions").hide();
         return false;
     }
 
@@ -187,14 +249,31 @@ function displayForm()
         }
     }
 
+    function submit_formulaire() {
+        log.info("submit_formulaire()");
+        var $form = $("#form");
+        var s = $form.serialize(); 
+        $.ajax({ 
+                type: "POST", 
+                data: s, 
+                url: $form.attr("action"), 
+                success: function(retour){
+                        $form.dialog("close");
+                        $("#log").html(retour);
+                        monaDisplayList();
+                        return false;
+                },
+                error: function() {
+                    alert("error");
+                    return false;
+                }
+        });
+    }
 
 
-    function chargement_page()
+    function chargement_page(html)
     {
         log.info("chargement_page()");
-        /* calendrier */
-        $("#form_calendar").datepicker("destroy");
-        $("#form_calendar").datepicker({dateFormat: 'yy-mm-dd'});
         /* quand on clique dans le tableau --> categorie */
         $("input.input_cat").live("click", afficher_arbre);
         ajouter_ligne_tableau();
@@ -202,37 +281,60 @@ function displayForm()
         /* L'arbre des catégories */
         buildCatTree("#form_tree");
         $("#form_tree a").click(onClick_sur_larbre);
-        $("#form_tree").hide();
-        /* remplir la liste des who */
-        monaFillWho("#form_who");
+        $("#form_tree").dialog({
+            buttons: {
+                "Choisir": choisir_categorie,
+                "Annuler": function() {
+                    $(this).dialog("close");
+                }
+            },
+            modal: true,
+            autoOpen: false,
+            }
+        );
+
         /* transformation du formulaire en modal */
         $("#form").dialog({
             buttons: {
                 "Annuler": function() {
-                    alert("Cancel");
+                    $("#form").dialog("close");
                 },
-                "Envoyer": function() {
-                    alert("OK");
-                    }
+                "Envoyer": submit_formulaire
             },
             modal: true,
             overlay: { 
                 opacity: 0.5, 
                 background: "black" 
-            } 
+            },
+            title: "Ajout d'une opération" ,
             });
 
         /* ajout d'une catégorie */
-        $("#button_add_cat").click(ajouter_ligne_tableau);
+        $(".ui-icon-plusthick").click(ajouter_ligne_tableau);
+        /* suppression d'une ligne */
+        $(".ui-icon-closethick").live("click", enlever_ligne);
 
-        $("#input_tags").keyup(auto_completion);
-        $("#input_tags").keydown(move_key);
+
+        /* autocompletion */
+        $("#input_labels").keyup(auto_completion);
+        $("#input_labels").keydown(move_key);
+
+        /* calendrier */
+        $("#form_calendar").val("david");
+        $("#form").css("background-color", "red");
+
+        alert("test");
+        $("#form").css("background-color", "blue");
+        $("#form_calendar").datepicker("destroy");
+        $("#form_calendar").datepicker({dateFormat: 'yy-mm-dd'});
 
         return false;
     }
 
     /* aller chercher la page */
+    $("#div_form").empty();
     $("#div_form").load("form2.html", chargement_page);
+
 
 
 }

@@ -9,9 +9,9 @@ function onSelect() {
     $("#form_add_cat p b").text($(".selected").text());
     return false;
 }
-
 function buildCatTree(name)
 {
+    log.info("buildCatTree()");
 
     ulId = name;
 
@@ -19,9 +19,15 @@ function buildCatTree(name)
     {
         insertTree2_r(0, "Catégories", $(name));
     }
+    var nb = 0;
     function insertTree2_r(ancestorId, ancestorName, jContent)
     {
-        var jLi = $("<li>").append("<a href=\""+ancestorId+"\">"+ancestorName+"</a>");
+        if (nb == 0) {
+            var jLi = $("<li>").append("<a href=\""+ancestorId+"\">"+ancestorName+"</a>");
+            nb++;
+        } else {
+            var jLi = $("<li>").addClass("closed").append("<a href=\""+ancestorId+"\">"+ancestorName+"</a>");
+        }
         if (monaTabCategoriesFather[ancestorId] == undefined) {
             /* pas d'enfants */
             jContent.append(jLi);
@@ -40,7 +46,7 @@ function buildCatTree(name)
     insertTree2();
     $(ulId).treeview({
                 persist: "location",
-                collapsed: true,
+                //collapsed: true,
                 unique: true,
     });
     $(ulId +" a").click(onSelect);
