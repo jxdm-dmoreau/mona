@@ -4,7 +4,23 @@ include '../OFC/php-ofc-library/open-flash-chart.php';
 require_once('../include/MySQL.php');
 require_once('../config.php');
 
+$month_names[0] = 'error';
+$month_names[1] = 'Jan';
+$month_names[2] = 'Fév';
+$month_names[3] = 'Mar';
+$month_names[4] = 'Avr';
+$month_names[5] = 'Mai';
+$month_names[6] = 'Juin';
+$month_names[7] = 'Juil';
+$month_names[8] = 'Aoû';
+$month_names[9] = 'Sep';
+$month_names[10] = 'Oct';
+$month_names[11] = 'Nov';
+$month_names[12] = 'Déc';
+
 $id_get = $_GET['id'];
+$date_min_get = $_GET['min'];
+$date_max_get = $_GET['max'];
 $mysql = new MySQL($mysql_server, $mysql_login, $mysql_pwd, $mysql_db);
 
 
@@ -51,9 +67,52 @@ foreach ($tab as $value) {
     $i++;
 }
 
+/* boucle de date min à date max */
+list($year_min, $month_min, $day_min) = split('-', $date_min_get);
+list($year_max, $month_max, $day_max) = split('-', $date_max_get);
 
+/* on incrémente date de 1 pour prendre en compte le dernier mois */
+$month_max = ($month_max==12)?$month_max=1:$month_max+1;
+if ($month_max == 1) {
+    $year_max++;
+}
+
+
+$end = false;
+//print_r($sum);
+do {
+    /* sauvegarde des min */
+    $year_begin = $year_min + 0;
+    $month_begin = $month_min + 0;
+    /* mois suivant */
+    $month_min = ($month_min==12)?$month_min=1:$month_min+1;
+    if ($month_min == 1) {
+        $year_min++;
+    }
+    /* requetes */
+    $query = "
+        SELECT SUM(op_cat.value)
+        FROM op_cat, cat, operations
+        WHERE ($where)
+        AND op_cat.cat_id = cat.id
+        AND op_cat.op_id = operations.id
+        AND operations.date >= '$year_begin-$month_begin-01'
+        AND operations.date < '$year_min-$month_min-01'
+        GROUP BY cat.id";
+    print("<query>$query</query>\n");
+    $result = $mysql->query($query);
+    $sous_total = 0;
+    while($line = mysql_fetch_assoc($result)) {
+        $sous_total += $line['SUM(op_cat.value)'];
+    }
+    $sum[] = $sous_total;
+    $names[] = "$month_names[$month_begin] $year_begin";
+    /* done ? */
+    $end = ($year_min == $year_max) && ($month_min == $month_max);
+} while (!$end);
 
 /* envoie des 12 requetes vers le serveur MySQL */
+/*
 for($i = 1; $i < 12; $i++ ) {
     $current_month = $i;
     $next_year = 2009;
@@ -80,8 +139,7 @@ for($i = 1; $i < 12; $i++ ) {
      $sum[] = $sous_total;
 
 }
-
-
+*/
 /* recherche du max */
 $max = 0;
 foreach ($sum as $value) {
@@ -93,18 +151,6 @@ foreach ($sum as $value) {
 /* graphique */
 $chart = new open_flash_chart();
 
-$names[] = 'Jan';
-$names[] = 'Fév';
-$names[] = 'Mar';
-$names[] = 'Avr';
-$names[] = 'Mai';
-$names[] = 'Juin';
-$names[] = 'Juil';
-$names[] = 'Aoû';
-$names[] = 'Sep';
-$names[] = 'Oct';
-$names[] = 'Nov';
-$names[] = 'Déc';
 
 
 $title = new title("tmp");
@@ -136,7 +182,10 @@ $y_legend->set_style( '{font-size: 22px; color: #778877}' );
 $chart->set_y_legend( $y_legend );
 
 
-echo $chart->toPrettyString();
+$myFile = "bar.json";
+$fh = fopen($myFile, 'w') or die("can't open file");
+fwrite($fh, $chart->toString());
+fclose($fh);
 
 
 ?>

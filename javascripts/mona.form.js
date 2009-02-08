@@ -1,21 +1,10 @@
+
+var once = 0;
+
 function displayForm()
 {
 
     var nb_row = 0; // compteur pour les différentes lignes du tableau
-
-    function choisir_categorie()
-    {
-        /* TODO Vérifier que l'utilisateur a chosit une catégorie */
-        log.info("choisir_categorie()");
-
-
-        /* on deselectionne le input */
-        var jInput = $(".input_cat_selected");
-        jInput.removeClass("input_cat_selected");
-        /* on ferme la fenêtre*/
-        $(this).dialog("close");
-        return false;
-    }
 
     /* affiche l'arbre des catégories */
     function afficher_arbre()
@@ -24,8 +13,14 @@ function displayForm()
         var jThis = $(this);
         /* on applique une class au input pour pouvoir l'indentifier */
         jThis.addClass("input_cat_selected");
+        /* on cherche la position */
+        var pos = jThis.findPos();
+        var posX = pos.x;
+        var posY = pos.y + 25;
         var jTree = $("#form_tree");
-        jTree.dialog("open");
+        jTree.css("top", posY);
+        jTree.css("left", posX);
+        jTree.fadeIn("slow");
     }
 
     function update_total()
@@ -84,12 +79,14 @@ function displayForm()
         var jTd = $("<td></td>");
         var jTd2 = $("<td></td>");
         var jTd3 = $("<td></td>");
-        var jDiv = $("<div></div>");
-        jDiv.addClass("ui-widget").addClass("ui-corner-all").addClass("ui-state-default").addClass("mona-icon");;
-        var jDiv2 = $("<div></div>");
-        jDiv2.addClass("ui-icon").addClass("ui-icon-closethick").attr("nb", nb_row);
-        jDiv.append(jDiv2);
-        jTd3.append(jDiv);
+        if (nb_row != 0) {
+            var jDiv = $("<div></div>");
+            jDiv.addClass("ui-widget").addClass("ui-corner-all").addClass("ui-state-default").addClass("mona-icon");;
+            var jDiv2 = $("<div></div>");
+            jDiv2.addClass("ui-icon").addClass("ui-icon-closethick").attr("nb", nb_row);
+            jDiv.append(jDiv2);
+            jTd3.append(jDiv);
+        }
 
 
         jInputSomme.change(formate_somme);
@@ -133,10 +130,11 @@ function displayForm()
         jInput.val($(this).text());
         /* l'id */
         $("#input_cat_id_"+id[1]).val($(this).attr("href"));
-        /* cache l'arbre */
-        //$("#form_tree").hide();
-        /* on enlève l'attribut */
-        //jInput.removeClass("input_cat_selected");
+        /* on deselectionne le input */
+        var jInput = $(".input_cat_selected");
+        jInput.removeClass("input_cat_selected");
+        /* on ferme la fenêtre*/
+        $("#form_tree").hide();
         return false;
     }
 
@@ -156,6 +154,9 @@ function displayForm()
     function auto_completion()
     {
         log.info("auto_completion");
+        /* conversion en minuscule */
+        var str = $("#input_labels").val();
+        $("#input_labels").val(str.toLowerCase());
         _currentInputFieldValue = extract_tags_from_input();
         log.debug("current: " + _currentInputFieldValue);
         if (_oldInputFieldValue != _currentInputFieldValue){
@@ -249,8 +250,42 @@ function displayForm()
         }
     }
 
+    function check_form()
+    {
+        /* date */
+        var jObj = $("#form_calendar");
+        if (jObj.val() == "") {
+            jObj.addClass("form-error");
+            return false;
+        }
+        jObj.removeClass("form-error");
+
+        /* categories */
+        for (var i=0; i < 20; i++) {
+            jObj = $("#input_cat_name_"+i);
+            if (jObj != undefined && jObj.val() == "") {
+                jObj.addClass("form-error");
+                return false;
+            }
+            jObj.removeClass("form-error");
+            jObj = $("#input_somme_"+i);
+            if (jObj != undefined && (jObj.val() == "0.00" || jObj.val() == "0")) {
+                jObj.addClass("form-error");
+                return false;
+            }
+            jObj.removeClass("form-error");
+        }
+
+
+        return true;
+    }
+
     function submit_formulaire() {
         log.info("submit_formulaire()");
+        /* TODO vérification du formulaire */
+        if (!check_form()) {
+            return false; 
+        }
         var $form = $("#form");
         var s = $form.serialize(); 
         $.ajax({ 
@@ -258,7 +293,7 @@ function displayForm()
                 data: s, 
                 url: $form.attr("action"), 
                 success: function(retour){
-                        $form.dialog("close");
+                        $("#div_form").dialog("close");
                         $("#log").html(retour);
                         monaDisplayList();
                         return false;
@@ -270,62 +305,53 @@ function displayForm()
         });
     }
 
-
     function chargement_page(html)
     {
         log.info("chargement_page()");
-        /* quand on clique dans le tableau --> categorie */
-        $("input.input_cat").live("click", afficher_arbre);
-        ajouter_ligne_tableau();
-
         /* L'arbre des catégories */
         buildCatTree("#form_tree");
+        /* quand on clique dans le tableau --> categorie */
         $("#form_tree a").click(onClick_sur_larbre);
-        $("#form_tree").dialog({
-            buttons: {
-                "Choisir": choisir_categorie,
-                "Annuler": function() {
-                    $(this).dialog("close");
-                }
-            },
-            modal: true,
-            autoOpen: false,
-            }
-        );
+        if (once == 0) {
+            $("input.input_cat").live("click", afficher_arbre);
+        }
+        ajouter_ligne_tableau();
+
+
+        /* mise à jour des labels */
+        initLabels();
 
         /* transformation du formulaire en modal */
-        $("#form").dialog({
-            buttons: {
-                "Annuler": function() {
-                    $("#form").dialog("close");
+        if (once == 0) {
+            $("#div_form").dialog({
+                buttons: {
+                    "Annuler": function() {
+                        $("#div_form").dialog("close");
+                    },
+                    "Envoyer": submit_formulaire
                 },
-                "Envoyer": submit_formulaire
-            },
-            modal: true,
-            overlay: { 
-                opacity: 0.5, 
-                background: "black" 
-            },
-            title: "Ajout d'une opération" ,
-            });
+                modal: false,
+                overlay: { 
+                    opacity: 0.5, 
+                    background: "black" 
+                },
+                title: "Ajout d'une opération" ,
+                });
+            once = 1;
+        } else {
+            $("#div_form").dialog("open");
+        }
 
         /* ajout d'une catégorie */
         $(".ui-icon-plusthick").click(ajouter_ligne_tableau);
         /* suppression d'une ligne */
         $(".ui-icon-closethick").live("click", enlever_ligne);
 
-
         /* autocompletion */
         $("#input_labels").keyup(auto_completion);
         $("#input_labels").keydown(move_key);
 
         /* calendrier */
-        $("#form_calendar").val("david");
-        $("#form").css("background-color", "red");
-
-        alert("test");
-        $("#form").css("background-color", "blue");
-        $("#form_calendar").datepicker("destroy");
         $("#form_calendar").datepicker({dateFormat: 'yy-mm-dd'});
 
         return false;

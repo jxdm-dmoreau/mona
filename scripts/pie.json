@@ -1,0 +1,1 @@
+{"elements":[{"type":"pie","colours":["#d01f3c","#356aa0","#C79810"],"border":2,"start-angle":35,"animate":true,"tip":"#val#\u20ac de #total#\u20ac<br>#percent# of 100%","values":[{"value":12,"label":"Alimentation"}]}],"title":{"text":"tmp"},"bg_colour":"#FFFFFF","x_axis":null}

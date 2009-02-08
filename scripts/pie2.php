@@ -5,6 +5,8 @@ require_once('../include/MySQL.php');
 require_once('../config.php');
 
 $id_get = $_GET['id'];
+$date_min_get = $_GET['min'];
+$date_max_get = $_GET['max'];
 $mysql = new MySQL($mysql_server, $mysql_login, $mysql_pwd, $mysql_db);
 
 
@@ -62,8 +64,8 @@ foreach ($first_children as $value) {
         WHERE ($where)
         AND op_cat.cat_id = cat.id
         AND op_cat.op_id = operations.id
-        AND operations.date >= '2008-01-01'
-        AND operations.date <= '3008-12-31'
+        AND operations.date >= '$date_min_get'
+        AND operations.date <= '$date_max_get'
         GROUP BY cat.id";
     $result = $mysql->query($query);
     $sum = 0;
@@ -95,7 +97,10 @@ $chart->set_bg_colour( '#FFFFFF' );
 
 $chart->x_axis = null;
 
-echo $chart->toPrettyString();
+$myFile = "pie.json";
+$fh = fopen($myFile, 'w') or die("can't open file");
+fwrite($fh, $chart->toString());
+fclose($fh);
 
 
 

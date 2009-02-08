@@ -1,0 +1,1 @@
+{"elements":[{"type":"bar_glass","values":[0]}],"bg_colour":"#FFFFFF","title":{"text":"tmp"},"x_axis":{"labels":{"labels":["Jan 2008"]},"colour":"#000000","grid-colour":"#d3d3d3"},"y_axis":{"min":0,"max":0,"steps":0,"colour":"#000000","grid-colour":"#d3d3d3"},"y_legend":{"text":"Euros","style":"{font-size: 22px; color: #778877}"}}

@@ -1,17 +1,17 @@
 <form id="form" name="form" action="scripts/add_operation.php" method="post" >
 
-    <div id="form_date">
-    Date :
-        <input  type="text" size="10" value="" id="form_calendar" name="date"/>
-    </div>
-
     <div id="form_type">
         Type :
         <input type="radio" name="type" value="debit" checked />Débit
         <input type="radio" name="type" value="credit" />Crédit
         <br />
     </div>
-    <input id="jie" type="text" />
+
+    <div id="form_date">
+    Date :
+        <input autocomplete="off" type="text" size="10" value="" id="form_calendar" name="date"/>
+    </div>
+
 
 
     <table id="table_cat">
@@ -31,8 +31,8 @@
     </tr>
     </tfoot>
     </table>
-<!--    <button id="button_add_cat">Ajouter une catégorie</button>-->
-    <ul id="form_tree"></ul>
+
+    <div id="dialog-tree"><ul id="form_tree"></ul></div>
 
     <div id="form_tag">
         Tags : <input type="test" name="input_labels" id="input_labels" value="" autocomplete="off"/>

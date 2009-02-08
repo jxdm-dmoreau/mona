@@ -142,7 +142,7 @@ function displayList(xml) {
     /*$(".details").hover(displayDetails, function() {
             $("div#details").fadeOut("fast");
             });*/
-    $("#tab_liste").tablesorter();
+    //$("#tab_liste").tablesorter();
 }
 
 function traiteXmlList(xmlDoc) {

@@ -1,6 +1,6 @@
 body {
 	font-family: "Trebuchet MS", Trebuchet, Verdana, Arial, Sans-Serif;
-	font-size: 100%;
+        font-size:62.5%;
 	background-image: url(../images/canvastile_bg1.jpg);
 	background-repeat: repeat-x;
 	background-color: #e6e8eb;
@@ -194,6 +194,10 @@ ul#form_tree {
     display: none;
     font-size: 11px;
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    border: 1px solid #AAAAAA;
+    z-index: 10000;
+    position: fixed;
+    background-color: white;
 }
 
 input.input_cat_selected {
@@ -219,4 +223,17 @@ li.tagsselected {
 
 .mona-icon:hover {
     cursor: pointer;
+}
+
+.form-error {
+    background-color: orange;
+}
+.size {
+    border: 1px solid #AAAAAA;
+    width: 800px;
+    height: 300px;
+    padding: 20px;
+display: block;
+}
+#stats-form {
 }

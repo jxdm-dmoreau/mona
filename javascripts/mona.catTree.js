@@ -15,6 +15,9 @@ function buildCatTree(name)
 
     ulId = name;
 
+    /* on commence par tout effacer */
+    $(name).empty();
+
     function insertTree2()
     {
         insertTree2_r(0, "Catégories", $(name));

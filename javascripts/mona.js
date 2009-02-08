@@ -29,7 +29,10 @@ function initLabels()
             });
         }
     });
+}
 
+function initCats()
+{
     /* categories */
     $.ajax({
         type: "GET",
@@ -139,37 +142,6 @@ function addCategory(node) {
 }
 
 
-
-
-function monaDisplayStats() {
-	$("#main").empty();
-        /*
-	$("#main").append($("<div id=\"my_chart2\">"));
-    swfobject.embedSWF(
-	"open-flash-chart.swf", "my_chart2", "550", "300",
-	"9.0.0", "expressInstall.swf",
-	{"data-file":"scripts/data2.php"}
-	);
-	$("#main").append($("<div id=\"my_chart3\">"));
-    swfobject.embedSWF(
-	"open-flash-chart.swf", "my_chart3", "550", "300",
-	"9.0.0", "expressInstall.swf",
-	{"data-file":"scripts/data3.php?id=0"}
-	);
-        */
-	$("#main").append($("<div id=\"bar1\">"));
-    swfobject.embedSWF(
-	"open-flash-chart.swf", "bar1", "550", "300",
-	"9.0.0", "expressInstall.swf",
-	{"data-file":"scripts/bar1.php?id=0"}
-	);
-	$("#main").append($("<div id=\"pie2\">"));
-    swfobject.embedSWF(
-	"open-flash-chart.swf", "pie2", "550", "300",
-	"9.0.0", "expressInstall.swf",
-	{"data-file":"scripts/pie2.php?id=0"}
-	);
-}
 
 
 // Params
