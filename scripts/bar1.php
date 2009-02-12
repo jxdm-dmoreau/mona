@@ -99,7 +99,7 @@ do {
         AND operations.date >= '$year_begin-$month_begin-01'
         AND operations.date < '$year_min-$month_min-01'
         GROUP BY cat.id";
-    print("<query>$query</query>\n");
+    print("<query>$query</query><br><br>\n");
     $result = $mysql->query($query);
     $sous_total = 0;
     while($line = mysql_fetch_assoc($result)) {

@@ -71,7 +71,22 @@ function displayDetails()
 }
 
 
-
+function monaIcon(iconName) {
+    var jDiv = $("<div></div>");
+    jDiv.addClass("ui-widget");
+    jDiv.addClass("ui-state-default");
+    jDiv.addClass("ui-corner-all");
+    jDiv.addClass("mona-icon");
+    var jSpan = $("<span></span>");
+    jSpan.addClass("ui-icon")
+    jSpan.addClass(iconName);
+    jDiv.append(jSpan);
+    jDiv.hover(
+            function() { $(this).addClass('ui-state-hover'); }, 
+            function() { $(this).removeClass('ui-state-hover'); }
+  );
+    return  jDiv;
+}
 
 
 function displayList(xml) {
@@ -86,6 +101,7 @@ function displayList(xml) {
     tr.append("<th id=\"th_labels\">Labels</th>");
     tr.append("<th id=\"\"></th>");
     tr.append("<th id=\"\"></th>");
+    tr.append("<th id=\"\"></th>");
     var thead = $("<thead></thead>");
     thead.append(tr);
     $("#tab_liste").append(thead);
@@ -95,50 +111,69 @@ function displayList(xml) {
 	    tr.append("<td>" + tab[i]['date'] + "</td>");
             if (tab[i]['value'] > 0) {
                 tr.append("<td>" + $.sprintf("%.2f€", tab[i]['value']) + "</td>");
-                tr.append("<td>" + $.sprintf("%.2f€", 0) + "</td>");
+                tr.append("<td>-</td>");
             } else {
-                tr.append("<td>" + $.sprintf("%.2f€", 0) + "</td>");
+                tr.append("<td>-</td>");
                 tr.append("<td>" + $.sprintf("%.2f€", tab[i]['value']*(-1)) + "</td>");
             }
+            /* labels */
             var tmp = "<td>";
             for(var j = 0; j < tab[i]['labels'].length; j++) {
                 tmp += tab[i]['labels'][j].textContent + " ";
             }
             tmp += "</td>";
             tr.append(tmp);
-	    tr.append("<td><button id=\"del_"+tab[i]['id']+"\">Supprimer</button></td>");
-	    tr.append("<td><a href=\""+tab[i]['id']+"\" class=\"details\">+</a></td>");
+
+            /* detail icon */
+            var td = $("<td></td>");
+            var icon = monaIcon("ui-icon-zoomin");
+            var link = $("<a></a>");
+            link.attr("href", tab[i]['id']);
+            link.addClass("details");
+            link.append(icon);
+            td.append(link);
+            tr.append(td);
+
+            td = $("<td></td>");
+            /* edit button */
+            tr.append(td.append(monaIcon("ui-icon-pencil")));
+            td = $("<td></td>");
+            /* delete icon */
+            var icon = monaIcon("ui-icon-closethick");
+            icon.attr("id", "del_"+tab[i]['id']);
+            tr.append(td.append(icon));
+
 	    $("#tab_liste").append(tr);
             $("#tab_liste tr:odd").addClass("odd");
             $("#tab_liste tr:even").addClass("even");
 
 
-	$("#del_"+tab[i]['id']).click(function() {
-			var reg = /del_(\d+)/;
-			var id = reg.exec($(this).attr("id"));
-			if(confirm("Voulez-vous supprimer l'opération "+id[1]+"?")) {
-				$.ajax({
-				type: "POST",
-				async: false,
-				data: "id="+id[1],
-				url: "scripts/del_operation.php",
-				success: function(res) {
-					$("#log").text(res);
-					monaDisplayList();
-				},
-				error:
-				function (XMLHttpRequest, textStatus, errorThrown) {
-					document.getElementById('result').innerHTML = textStatus;
-					}
-				});
-			} else {
-				alert("OK, je ne fais rien");
-			}
-			});
+            $("#del_"+tab[i]['id']).click(function() {
+                var reg = /del_(\d+)/;
+                var id = reg.exec($(this).attr("id"));
+                if(confirm("Voulez-vous supprimer l'opération "+id[1]+"?")) {
+                    $.ajax({
+                    type: "POST",
+                    async: false,
+                    data: "id="+id[1],
+                    url: "scripts/del_operation.php",
+                    success: function(res) {
+                        $("#log").text(res);
+                        monaDisplayList();
+                    },
+                    error:
+                        function (XMLHttpRequest, textStatus, errorThrown) {
+                            document.getElementById('result').innerHTML = textStatus;
+                        }
+                    });
+                } else {
+                    alert("OK, je ne fais rien");
+                }
+            });
     }
     /* afficher les details d'une operation */
     $(".details").click(displayDetails);
-    $("tr").click(displayDetails);
+    //$("tr").click(displayDetails);
     /*$(".details").hover(displayDetails, function() {
             $("div#details").fadeOut("fast");
             });*/

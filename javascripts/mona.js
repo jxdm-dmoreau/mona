@@ -206,26 +206,8 @@ function registerFunctions() {
                 $("#selector button").show();
                 $("#form_add_cat").hide();
                 addCat($("#form_add_cat input[name='name']").val(), id_created);
-                /*
-                var link = "<li><a href=\""+id_created+"\">"+$("#form_add_cat input[name='name']").val()+"</a></li>";
-                if ($(".selected:parent + ul").length == 0) {
-                    $(".selected").parent().append("<ul>"+link+"</ul>");
-                } else {
-                    $(".selected + ul").prepend(link);
-                }
-                */
-                /* clean tree */
-                /*
-                $(".collapsable").removeClass("collapsable");
-                $(".lastCollapsable").removeClass("lastCollapsable");
-                $(".expandable").removeClass("expandable");
-                $("#david_tree div").remove();
-                */
-                /* construct tree */
-                /*
-                $("#david_tree").treeview();
-                */
-                return true;
+                alert(id_created);
+                return false;
                 $("#david_tree a").unbind('click');
                 $("#david_tree a").click(function() {
                     $(".selected").removeClass("selected");

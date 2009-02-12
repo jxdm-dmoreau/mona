@@ -19,14 +19,17 @@ $table = $_GET['table'];
 
 $query = "SELECT * FROM $table ";
 $result = $mysql->query($query);
+print "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+
 print "<$table>\n";
 while ($line = mysql_fetch_assoc($result)) {
     extract($line);
-    print "\t<row>\n";
+    print "   <row>\n";
     foreach($line as $key => $value) {
-	    print("\t\t<$key>$value</$key>");
+        $value = utf8_encode($value);
+        print("      <$key>$value</$key>\n");
     }
-    print "\t</row>\n";
+    print "   </row>\n";
 }
 print "</$table>\n";
 

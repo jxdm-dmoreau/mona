@@ -59,7 +59,8 @@ text-decoration: underline;
 
 #tab_liste {
     border-collapse: collapse;
-	 float: left;
+    float: left;
+    font-size: 12px;
 }
 
 #tab_liste, th, tr, td {

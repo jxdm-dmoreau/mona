@@ -118,9 +118,9 @@
         <div id="menu">
         <ul>
         <li><a id="liste" href="#">Liste des Opérations</a></li>
-        <li><!--<a id="params" href="#">-->Paramètres<!--</a>--></li>
+        <li><a id="params" href="#">Paramètres</a></li>
         <li><a id="modal" href="#">Ajout d'une opération</a></li>
-        <li><a  id="stats" href="#stats">Statistiques</a></li>
+        <li><a  id="stats" href="#">Statistiques</a></li>
         <li> << Retour</li>
         <ul>
         </div>

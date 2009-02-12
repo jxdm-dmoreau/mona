@@ -16,7 +16,7 @@ $color = $_GET['color'];
 
 
 $query = "
-INSERT INTO `mona`.`categories` (
+INSERT INTO `mona`.`cat` (
 	`id` ,
 	`father_id` ,
 	`name` ,
@@ -32,7 +32,7 @@ $result = $mysql->query($query);
 
 $query = "
 SELECT id
-FROM categories
+FROM cat
 WHERE name = '$name'
 AND father_id = '$father_id'";
 
