@@ -3,8 +3,19 @@ var once = 0;
 
 function displayForm()
 {
+    /* new or edit? */
+    var jThis = $(this);
+    if (jThis.attr("href") != "#") {
+        retrieve_edit_infos(jThis.attr("href"));
+    }
 
     var nb_row = 0; // compteur pour les différentes lignes du tableau
+
+    /* va chercher les infos sur l'opération que l'on va éditer */
+    function retrieve_edit_infos(id)
+    {
+        return false;
+    }
 
     /* affiche l'arbre des catégories */
     function afficher_arbre()
@@ -330,7 +341,7 @@ function displayForm()
                     },
                     "Envoyer": submit_formulaire
                 },
-                modal: false,
+                modal: true,
                 overlay: { 
                     opacity: 0.5, 
                     background: "black" 
@@ -360,6 +371,7 @@ function displayForm()
     /* aller chercher la page */
     $("#div_form").empty();
     $("#div_form").load("form2.html", chargement_page);
+    return false;
 
 
 

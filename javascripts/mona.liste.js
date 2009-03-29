@@ -134,11 +134,17 @@ function displayList(xml) {
             td.append(link);
             tr.append(td);
 
+
+            /* Edit button */
             td = $("<td></td>");
-            /* edit button */
-            tr.append(td.append(monaIcon("ui-icon-pencil")));
-            td = $("<td></td>");
+            link = $("<a></a>");
+            link.attr("href", tab[i]['id']);
+            link.append(monaIcon("ui-icon-pencil"));
+            link.addClass("edit");
+            td.append(link);
+            tr.append(td);
             /* delete icon */
+            td = $("<td></td>");
             var icon = monaIcon("ui-icon-closethick");
             icon.attr("id", "del_"+tab[i]['id']);
             tr.append(td.append(icon));
@@ -173,6 +179,7 @@ function displayList(xml) {
     }
     /* afficher les details d'une operation */
     $(".details").click(displayDetails);
+    $(".edit").click(displayForm);
     //$("tr").click(displayDetails);
     /*$(".details").hover(displayDetails, function() {
             $("div#details").fadeOut("fast");

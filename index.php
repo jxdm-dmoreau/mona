@@ -5,17 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 
 
-
-
-
         <link rel="stylesheet" media="screen" type="text/css" title="Style" href="./styles/main.css" />
-        <script type="text/javascript" src="javascripts/jquery-1.3.1.min.js"></script>
+        <script type="text/javascript" src="javascripts/ui/js/jquery-1.3.2.min.js"></script>
         <!-- jquery ui -->
-	<script type="text/javascript" src="javascripts/ui/ui.core.js"></script>
-	<script type="text/javascript" src="javascripts/ui/ui.resizable.js"></script>
-	<script type="text/javascript" src="javascripts/ui/ui.draggable.js"></script>
-	<script type="text/javascript" src="javascripts/ui/ui.datepicker.js"></script>
-	<script type="text/javascript" src="javascripts/ui/ui.dialog.js"></script>
+	<script type="text/javascript" src="javascripts/ui/js/jquery-ui-1.7.custom.min.js"></script>
         <!-- jquery ui -->
 	<link rel="StyleSheet" href="styles/ui.all.css" type="text/css" />
         <script type="text/javascript" src="javascripts/mona.js"></script>
@@ -54,9 +47,7 @@
 				$.modal.close();
                         });
 
-                $("#modal").click(function() {
-                    displayForm()
-		});
+                $("#modal").click(displayForm);
 
        		$("#form").submit(function() {
 			/* check the form */
